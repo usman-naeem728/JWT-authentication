@@ -17,7 +17,11 @@ const mongodbURI = process.env.mongodbURI || "mongodb+srv://userdb123:0987654321
 
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors())
+
+app.use(cors({
+    origin: ['http://localhost:3000', "*"],
+    credentials: true
+}));
 
 
 
@@ -71,7 +75,7 @@ app.post("/signup", (req, res) => {
 
             if (user) { // user already exist
                 console.log("user already exist: ", user);
-                res.status(400).send({ message: "user already exist,, please try a different email" });
+                res.status(400).send({ message: "user already exist, please try a different email" });
                 return;
 
             } else { // user not already exist

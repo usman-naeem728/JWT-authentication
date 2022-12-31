@@ -8,7 +8,7 @@ const baseUrl = 'http://localhost:5001'
 
 function Signup() {
     const [result, setResult] = useState("");
-
+    const [msg,setMsg] = useState("")
     const [firstname, setfirstname] = useState("");
     const [lastname, setlastname] = useState("");
     const [email, setemail] = useState("")
@@ -32,6 +32,8 @@ function Signup() {
 
         } catch (e) {
             console.log("e: ", e);
+            console.log("error", e.response.data.message)
+            setMsg(e.response.data.message)
         }
     }
 
@@ -39,6 +41,7 @@ function Signup() {
     return (
         <div>
             <h1>This is Signup page</h1>
+            <h4>{msg}</h4>
             <form onSubmit={signuphandler}>
                 <input type="text" placeholder="FristName"  onChange={(e) => { setfirstname(e.target.value) }}/>
                 <input type="text" placeholder="LastName"  onChange={(e) => { setlastname(e.target.value) }}  />
